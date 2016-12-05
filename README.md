@@ -1,10 +1,10 @@
-# Ng2-Platfoms
+# Ng2-platforms
 
-The aim of this project is provide feature Available on different platforms (Browser, Mobile and Desktop) by exposing simple properties and methods while handling the native api call base on the platform where the Angular 2 Application is running.
+The aim of this project is provide some feature available on different platforms (Browser, Mobile and Desktop) by exposing simple properties and methods while handling the native api call base on the platform where the Angular 2 Application is running.
 
 | Feature | Description | Browser | Ionic2 | Electron |
 | --- | --- | --- | --- | --- |
-| `Camera` | Take or select picture | Available (only photo) | Available | TODO
+| `Camera` | Take or select picture | Available (only take photo) | Available | TODO
 | `Clipboard` | Copy and Paste | Available | Available | Available
 | `Location` | Get current position | Available | Available | Available
 | `Push` | Push notification | Available (with SW) | Available | TODO
