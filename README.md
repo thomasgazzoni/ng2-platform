@@ -1,4 +1,4 @@
-# Ng2-platforms
+# ng2-platform
 
 The aim of this project is provide some feature available on different platforms (Browser, Mobile and Desktop) by exposing simple properties and methods while handling the native api call base on the platform where the Angular 2 Application is running.
 
