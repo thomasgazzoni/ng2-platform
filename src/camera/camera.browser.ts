@@ -5,14 +5,17 @@ import { ICameraService, ITakePhotoOptions } from './camera.service';
 
 declare let window;
 
-export class DesktopCameraService implements ICameraService {
+export class CameraServiceBrowser implements ICameraService {
 
     public takePhoto(options: ITakePhotoOptions): Observable<string> {
 
         return Observable.fromPromise<string>(
 
             this.getMediaDevices()
-                .getUserMedia({ video: true, audio: false })
+                .getUserMedia({
+                    video: true,
+                    audio: false
+                })
                 .then((stream: any) => {
 
                     return new Promise((resolve, reject) => {
@@ -21,6 +24,7 @@ export class DesktopCameraService implements ICameraService {
                             const vendorURL = window.URL || window.webkitURL;
                             const doc = document;
                             const videoElement = doc.createElement('video');
+
                             videoElement.src = vendorURL.createObjectURL(stream);
                             videoElement.play();
 

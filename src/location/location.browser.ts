@@ -4,7 +4,6 @@ import { ILocationService, ILocation } from './location.service';
 
 export class LocationServiceBrowser implements ILocationService {
 
-
     getCurrentPosition() {
 
         const options: PositionOptions = {
@@ -20,7 +19,6 @@ export class LocationServiceBrowser implements ILocationService {
                     (pos) => {
                         observer.next( pos.coords);
                         observer.complete();
-
                     }, (error) => {
                         observer.error(error);
                         observer.complete();

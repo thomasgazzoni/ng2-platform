@@ -7,10 +7,9 @@ import {
     DEFAULT_TAKE_PHOTO_OPTIONS, DEFAULT_GET_PHOTO_OPTIONS
 } from './camera.service';
 
-export class MobileCameraService implements ICameraService {
+export class CameraServiceIonic implements ICameraService {
 
     public takePhoto(options: ITakePhotoOptions): Observable<string> {
-        // take photo should accept arrey of options, like allow edit (should build interface???)
 
         return Observable
             .create((observer: Observer<string>) => {
@@ -22,9 +21,6 @@ export class MobileCameraService implements ICameraService {
                     encodingType: Camera.EncodingType.JPEG,
                     correctOrientation: true,
                     // saveToPhotoAlbum: false,
-                    // allowEdit: true,
-                    // targetWidth: 300,
-                    // targetHeight: 300p
                 };
 
                 this.setOptions(cameraOptions, options);
@@ -58,9 +54,6 @@ export class MobileCameraService implements ICameraService {
                     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                     encodingType: Camera.EncodingType.JPEG,
                     correctOrientation: true,
-                    // allowEdit: true,
-                    // targetWidth: 300,
-                    // targetHeight: 300
                 };
 
                 this.setOptions(cameraOptions, options);
@@ -91,7 +84,6 @@ export class MobileCameraService implements ICameraService {
     }
 
     private getErrorMessage(error) {
-        // console.log('ERROR MESSAGE:', error);
 
         let errorMessage = error;
 

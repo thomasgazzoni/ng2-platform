@@ -1,5 +1,6 @@
 
 export class PlatformService {
+    private _appName: string;
     private _isMobile: boolean;
     private _isDesktop: boolean;
     private _isWeb: boolean;
@@ -30,6 +31,10 @@ export class PlatformService {
         return !!window.cordova;
     }
 
+    public get appName(): string {
+        return this._appName;
+    }
+
     constructor() {
         this._isMobile = false;
         this._isDesktop = false;
@@ -51,4 +56,10 @@ export class PlatformService {
             this._isAndroid = !!window.device.platform.match(/android/gi);
         }
     }
+
+    public setAppInfo(name: string, version: string) {
+        this._appName = name;
+        this._appName = name;
+    }
+
 }

@@ -1,11 +1,7 @@
-import { Http } from '@angular/http';
 import { Observable, Observer } from 'rxjs/Rx';
+import { Http } from '@angular/http';
 
-import { IUser } from '../../user/user.model';
-
-import { IQrcodeService, QRCODE_API_GEN_ENDPOINT } from './qrcode.service';
-
-import { ENVIRONMENT } from '../../../environments/environment';
+import { IQrcodeService } from './qrcode.service';
 
 export class QrcodeServiceBrowser implements IQrcodeService {
 
@@ -15,11 +11,11 @@ export class QrcodeServiceBrowser implements IQrcodeService {
 
     }
 
-    public generateQrcode(data: string, fallbackUrl: string): string {
+    public generateQrcode(apiUrl: string, data: string, fallbackUrl: string): string {
 
         const params = `?s=${data}&url=${fallbackUrl}`;
 
-        return `${ENVIRONMENT.HOST}${QRCODE_API_GEN_ENDPOINT}${params}`;
+        return `${apiUrl}${params}`;
     }
 
     public scanQrcode() {

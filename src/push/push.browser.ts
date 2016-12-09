@@ -24,7 +24,7 @@ export class PushServiceBrowser extends PushUtils implements IPushService {
 
         // Check if push messaging is supported
         if (!('PushManager' in window)) {
-            console.log('Push messaging isn\'t supported.');
+            console.log(`Push messaging isn't supported.`);
             return;
         }
 
@@ -33,10 +33,6 @@ export class PushServiceBrowser extends PushUtils implements IPushService {
             // Do we already have a push message subscription?
             serviceWorkerRegistration.pushManager.getSubscription()
                 .then((subscription) => {
-                    // Enable any UI which subscribes / unsubscribes from
-                    // push messages.
-                    // var pushButton = document.querySelector('.js-push-button');
-                    // pushButton.disabled = false;
 
                     if (!subscription) {
                         // We aren’t subscribed to push, so set UI
@@ -46,14 +42,9 @@ export class PushServiceBrowser extends PushUtils implements IPushService {
 
                     // Keep your server in sync with the latest subscription
                     this.sendSubscriptionToServer(subscription.endpoint);
-
-                    // Set your UI to show they have subscribed for
-                    // push messages
-                    // pushButton.textContent = 'Disable Push Messages';
-                    // isPushEnabled = true;
                 })
-                .catch((err) => {
-                    console.log('Error during getSubscription()', err);
+                .catch((error) => {
+                    console.error('Error during getSubscription()', error);
                 });
         });
     }
@@ -68,30 +59,20 @@ export class PushServiceBrowser extends PushUtils implements IPushService {
             serviceWorkerRegistration.pushManager.subscribe()
                 .then((subscription) => {
                     // The subscription was successful
-                    // isPushEnabled = true;
-                    // pushButton.textContent = 'Disable Push Messages';
-                    // pushButton.disabled = false;
-
-                    // TODO: Send the subscription subscription.endpoint
-                    // to your server and save it to send a push message
-                    // at a later date
                     return this.sendSubscriptionToServer(subscription.endpoint);
                 })
-                .catch((e) => {
+                .catch((error) => {
                     if (Notification.permission === 'denied') {
                         // The user denied the notification permission which
                         // means we failed to subscribe and the user will need
                         // to manually change the notification permission to
                         // subscribe to push messages
-                        console.log('Permission for Notifications was denied');
-                        // pushButton.disabled = true;
+                        console.warn('Permission for Notifications was denied');
                     } else {
                         // A problem occurred with the subscription, this can
                         // often be down to an issue or lack of the gcm_sender_id
                         // and / or gcm_user_visible_only
-                        console.log('Unable to subscribe to push.', e);
-                        // pushButton.disabled = false;
-                        // pushButton.textContent = 'Enable Push Messages';
+                        console.error('Unable to subscribe to push.', error);
                     }
                 });
         });
@@ -102,39 +83,29 @@ export class PushServiceBrowser extends PushUtils implements IPushService {
         navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
             // To unsubscribe from push messaging, you need get the
             // subcription object, which you can call unsubscribe() on.
-            serviceWorkerRegistration.pushManager.getSubscription().then(
-                (pushSubscription) => {
+            serviceWorkerRegistration.pushManager.getSubscription()
+                .then((pushSubscription) => {
                     // Check we have a subscription to unsubscribe
                     if (!pushSubscription) {
-                        // No subscription object, so set the state
-                        // to allow the user to subscribe to push
-                        // isPushEnabled = false;
-                        // pushButton.disabled = false;
-                        // pushButton.textContent = 'Enable Push Messages';
+                        // No subscription available
                         return;
                     }
 
                     // TODO: Make a request to your server to remove
                     // the users data from your data store so you
                     // don't attempt to send them push messages anymore
+                    this.sendSubscriptionToServer(undefined);
 
                     // We have a subcription, so call unsubscribe on it
-                    pushSubscription.unsubscribe().then(() => {
-                        // pushButton.disabled = false;
-                        // pushButton.textContent = 'Enable Push Messages';
-                        // isPushEnabled = false;
-                    }).catch(function (e) {
-                        // We failed to unsubscribe, this can lead to
-                        // an unusual state, so may be best to remove
-                        // the subscription id from your data store and
-                        // inform the user that you disabled push
-
-                        console.log('Unsubscription error: ', e);
-                        // pushButton.disabled = false;
-                    });
-                }).catch(function (e) {
-                    console.log('Error thrown while unsubscribing from ' +
-                        'push messaging.', e);
+                    pushSubscription.unsubscribe()
+                        .then(() => {
+                        })
+                        .catch((e) => {
+                            console.error('Unsubscription error: ', e);
+                        });
+                })
+                .catch((error) => {
+                    console.error(`Error thrown while unsubscribing from push messaging:`, error);
                 });
         });
     }

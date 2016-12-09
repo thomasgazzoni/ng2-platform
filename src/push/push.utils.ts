@@ -1,4 +1,5 @@
 import { Observable, Subject } from 'rxjs/Rx';
+import { IPushNotification } from './push.service';
 
 /**
  * PushUtils
@@ -6,13 +7,17 @@ import { Observable, Subject } from 'rxjs/Rx';
 export class PushUtils {
 
     public onSubscribed: Observable<string>;
+    public onShowNotitication: Observable<IPushNotification>;
+
     private _onSubscribed: Subject<string>;
+    private _onShowNotification: Subject<IPushNotification>;
 
-    constructor(
-
-    ) {
+    constructor() {
         this._onSubscribed = new Subject<string>();
         this.onSubscribed = this._onSubscribed.asObservable();
+
+        this._onShowNotification = new Subject<IPushNotification>();
+        this.onShowNotitication = this._onShowNotification.asObservable();
     }
 
     protected endpointWorkaround(pushSubscription: PushSubscription) {
@@ -44,5 +49,32 @@ export class PushUtils {
         const regId = this.removeEndpoint(subscriptionId);
 
         this._onSubscribed.next(regId);
+    }
+
+/**
+ * Call this method to dispatch the pushNotification data to any listener of the
+ * onShowNotification Observable
+ *
+ * Ionic 2 Example:
+ *
+ * ```
+ * this._pushService.onShowNotitication.subscribe((pushNotification) => {
+ *
+ *      LocalNotifications.schedule({
+ *          id: 1,
+ *          title: `${pushNotification.title}`,
+ *          text: `${pushNotification.message}`,
+ *          sound: 'file://sound.mp3',
+ *          data: pushNotification.data
+ *      });
+ *
+ *      Vibration.vibrate([100, 300, 600]);
+ * });
+ * ```
+ * @stable
+ */
+    protected showPushNotification(pushNotification: IPushNotification) {
+
+        this._onShowNotification.next(pushNotification);
     }
 }

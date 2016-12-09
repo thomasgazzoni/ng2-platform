@@ -9,6 +9,9 @@ export interface ILocation extends Coordinates {
 }
 
 export interface ILocationService {
+    /**
+     * Return the current GPS (Coordinates) positions
+     */
     getCurrentPosition(): Observable<ILocation>;
 }
 

@@ -7,14 +7,16 @@ import { HttpModule } from '@angular/http';
 import { Http } from '@angular/http';
 import {
     PlatformService,
+    IPlatformConfig, PLATFORM_CONFIG_TOKEN, setupPlatformConfig,
     CameraService, cameraServiceFactory,
     ClipboardService, clipboardServiceFactory,
     LocationService, locationServiceFactory,
     PushService, pushServiceFactory,
-    ShareService, shareServiceFactory,
     QrcodeService, qrcodeServiceFactory,
+    ShareService, shareServiceFactory,
+    StorageService, storageServiceFactory,
     UploadService, uploadServiceFactory,
-} from './src/index';
+} from './index';
 
 @NgModule({
     imports: [
@@ -29,7 +31,6 @@ import {
         // Directives
     ],
     providers: [
-        PlatformService,
         {
             provide: CameraService,
             useFactory: cameraServiceFactory,
@@ -51,14 +52,19 @@ import {
             deps: [PlatformService]
         },
         {
+            provide: QrcodeService,
+            useFactory: qrcodeServiceFactory,
+            deps: [PlatformService, Http]
+        },
+        {
             provide: ShareService,
             useFactory: shareServiceFactory,
             deps: [PlatformService]
         },
         {
-            provide: QrcodeService,
-            useFactory: qrcodeServiceFactory,
-            deps: [PlatformService, Http]
+            provide: StorageService,
+            useFactory: storageServiceFactory,
+            deps: [PlatformService]
         },
         {
             provide: UploadService,
@@ -76,10 +82,20 @@ export class PlatformModule {
         }
     }
 
-    static forRoot(config?: {}): ModuleWithProviders {
+    static forRoot(config: IPlatformConfig = {} as any): ModuleWithProviders {
+
         return {
             ngModule: PlatformModule,
             providers: [
+                {
+                    provide: PLATFORM_CONFIG_TOKEN,
+                    useValue: config
+                },
+                {
+                    provide: PlatformService,
+                    useFactory: setupPlatformConfig,
+                    deps: [PLATFORM_CONFIG_TOKEN]
+                },
             ]
         };
     }

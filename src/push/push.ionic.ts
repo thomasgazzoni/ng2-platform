@@ -3,9 +3,6 @@ import {
     Push,
     PushNotification,
     PushOptions,
-    NotificationEventResponse,
-    LocalNotifications,
-    Vibration
 } from 'ionic-native';
 
 import { PushUtils } from './push.utils';
@@ -16,6 +13,15 @@ export class PushServiceIonic extends PushUtils implements IPushService {
     private push: PushNotification;
 
     public init() {
+
+        Push.hasPermission().then((data) => {
+            if (data.isEnabled) {
+                console.log('push isEnabled');
+            }
+        });
+    }
+
+    public subscribe() {
 
         const options: PushOptions = {
             android: {
@@ -33,13 +39,8 @@ export class PushServiceIonic extends PushUtils implements IPushService {
 
         this.push = Push.init(options);
 
-        Push.hasPermission().then((data) => {
-            if (data.isEnabled) {
-                console.log('push isEnabled');
-            }
-        });
-
-        this.push.setApplicationIconBadgeNumber(() => { }, () => { });
+        // Reset badge
+        this.push.setApplicationIconBadgeNumber(() => { }, () => { }, 0);
 
         this.push.on('registration', (data) => {
             console.debug('push notification registration', data);
@@ -48,45 +49,26 @@ export class PushServiceIonic extends PushUtils implements IPushService {
         });
 
         this.push.on('notification', (data) => {
-            console.debug('push notification notify', data);
 
-            this.showPushNotification(data);
+            this.showPushNotification({
+                title: data.title,
+                message: data.message,
+                data: data.additionalData,
+            });
         });
 
-        this.push.on('error', (e) => {
-            console.debug('push notification error', e);
+        this.push.on('error', (error) => {
+            console.error('Ionic push notification error', error);
         });
-
-    }
-
-    public subscribe() {
-
     }
 
     public unsubscribe() {
-        this.push.unregister(() => {
-            console.debug('unsubscribe success');
-        }, () => {
-            console.debug('unsubscribe error');
-        });
-    }
-
-    private showPushNotification(data: NotificationEventResponse) {
-
-        LocalNotifications.schedule({
-            id: 1,
-            title: 'Co-Produce (push-notification)',
-            text: `${data.message}`,
-            sound: 'file://sound.mp3',
-            data: data
-        });
-
-        Vibration.vibrate([100, 300, 600]);
-        // data.message,
-        // data.title,
-        // data.count,
-        // data.sound,
-        // data.image,
-        // data.additionalData
+        if (this.push) {
+            this.push.unregister(() => {
+                console.info('unsubscribe success');
+            }, () => {
+                console.error('unsubscribe error');
+            });
+        }
     }
 }

@@ -1,13 +1,10 @@
+import { Observable, Observer, Subject } from 'rxjs/Rx';
 import { Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { Observer } from 'rxjs/Observer';
 
 import { IUploadService, IUploadResult, IFileUploadResult } from './upload.service';
 import { UploadUtils } from './upload.utils';
-import { UploadedFile } from './upload.file';
 
-import { ENVIRONMENT } from '../../../environments/environment';
+// import { ENVIRONMENT } from '../../../environments/environment';
 
 export class UploadServiceBrowser extends UploadUtils implements IUploadService {
 
@@ -17,7 +14,7 @@ export class UploadServiceBrowser extends UploadUtils implements IUploadService 
 
     public upload<T>(endpoint: string, fieldName: string, fileData: string | Blob): IUploadResult<T> {
 
-        const url = ENVIRONMENT.API_BASE_URL + endpoint;
+        const url = endpoint;
 
         // fileData can be a File or a paste/photo image (base64)
         const fileToUpload = this.getFileToUpload(fileData);
@@ -34,20 +31,10 @@ export class UploadServiceBrowser extends UploadUtils implements IUploadService 
         const form = new FormData();
         form.append(fieldName, fileToUpload, 'image');
 
-        // Object.keys(this.data).forEach(k => {
-        //     form.append(k, this.data[k]);
-        // });
-
-        const uploadingFile = new UploadedFile(
-            '1',
-            'file',
-            fileToUpload.size
-        );
-
-        let time: number = new Date().getTime();
-        let load = 0;
-        let speed = 0;
-        let speedHumanized: string = null;
+        const time = new Date().getTime();
+        const load = 0;
+        const speed = 0;
+        const speedHumanized: string = null;
 
         result.abort = () => xhr.abort();
 
@@ -58,6 +45,14 @@ export class UploadServiceBrowser extends UploadUtils implements IUploadService 
 
                 xhr.upload.onprogress = (e: ProgressEvent) => {
                     if (e.lengthComputable) {
+
+                        // if (this.calculateSpeed) {
+                        //   time = new Date().getTime() - time;
+                        //   load = e.loaded - load;
+                        //   speed = load / time * 1000;
+                        //   speed = parseInt(<any>speed, 10);
+                        //   speedHumanized = humanizeBytes(speed);
+                        // }
 
                         const percent = Math.round(e.loaded / e.total * 100);
 
@@ -73,39 +68,32 @@ export class UploadServiceBrowser extends UploadUtils implements IUploadService 
                                 .subscribe(value => uploadProgress.next(value));
                         }
 
-                        if (speed === 0) {
-                            uploadingFile.setProgres({
-                                total: e.total,
-                                loaded: e.loaded,
-                                percent: percent
-                            });
-                        } else {
-                            uploadingFile.setProgres({
-                                total: e.total,
-                                loaded: e.loaded,
-                                percent: percent,
-                                speed: speed,
-                                speedHumanized: speedHumanized
-                            });
-                        }
-
-                        // this._emitter.emit(uploadingFile);
+                        // if (speed === 0) {
+                        //     uploadingFile.setProgres({
+                        //         total: e.total,
+                        //         loaded: e.loaded,
+                        //         percent: percent
+                        //     });
+                        // } else {
+                        //     uploadingFile.setProgres({
+                        //         total: e.total,
+                        //         loaded: e.loaded,
+                        //         percent: percent,
+                        //         speed: speed,
+                        //         speedHumanized: speedHumanized
+                        //     });
+                        // }
                     }
                 };
 
                 xhr.upload.onabort = (e: Event) => {
-                    uploadingFile.setAbort();
+
                 };
 
                 xhr.onreadystatechange = () => {
                     console.debug('onreadystatechange .readyState', xhr.readyState);
 
                     if (xhr.readyState === XMLHttpRequest.DONE) {
-                        uploadingFile.onFinished(
-                            xhr.status,
-                            xhr.statusText,
-                            xhr.response
-                        );
 
                         uploadProgress.next(100);
                         uploadProgress.complete();
@@ -126,7 +114,7 @@ export class UploadServiceBrowser extends UploadUtils implements IUploadService 
                 };
 
                 xhr.open('POST', url, true);
-                xhr.setRequestHeader('X-CSRFToken', ENVIRONMENT.AUTH_CSRFTOKEN);
+                // xhr.setRequestHeader('X-CSRFToken', ENVIRONMENT.AUTH_CSRFTOKEN);
                 xhr.withCredentials = true;
                 xhr.send(form);
             });

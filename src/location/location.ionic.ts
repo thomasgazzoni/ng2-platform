@@ -1,5 +1,4 @@
 import { Observable, Observer } from 'rxjs/Rx';
-
 import { Geolocation, GeolocationOptions } from 'ionic-native';
 
 import { ILocationService, ILocation } from './location.service';

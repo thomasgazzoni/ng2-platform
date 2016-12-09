@@ -1,12 +1,10 @@
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import { Subject } from 'rxjs/Subject';
+import { Observable, Observer, Subject } from 'rxjs/Rx';
 import { Transfer, FileUploadOptions } from 'ionic-native';
 
 import { IUploadService, IUploadResult, IFileUploadResult } from './upload.service';
 import { UploadUtils } from './upload.utils';
 
-import { ENVIRONMENT } from '../../../environments/environment';
+// import { ENVIRONMENT } from '../../../environments/environment';
 
 export class UploadServiceIonic extends UploadUtils implements IUploadService {
 
@@ -16,7 +14,7 @@ export class UploadServiceIonic extends UploadUtils implements IUploadService {
 
     public upload<T>(endpoint: string, fieldName: string, fileData: string): IUploadResult<T> {
 
-        const url = ENVIRONMENT.API_BASE_URL + endpoint;
+        const url = endpoint;
 
         // fileData is a file path/url on the device
         const fileToUpload = fileData;
@@ -33,9 +31,9 @@ export class UploadServiceIonic extends UploadUtils implements IUploadService {
             httpMethod: 'POST',
             fileKey: fieldName,
             headers: {
-                'X-CSRFToken': ENVIRONMENT.AUTH_CSRFTOKEN,
-                'Cookie': `csrftoken=${ENVIRONMENT.AUTH_CSRFTOKEN}; ftsession=${ENVIRONMENT.AUTH_SESSION}`,
-                'Referer': ENVIRONMENT.HOST,
+                // 'X-CSRFToken': ENVIRONMENT.AUTH_CSRFTOKEN,
+                // 'Cookie': `csrftoken=${ENVIRONMENT.AUTH_CSRFTOKEN}; ftsession=${ENVIRONMENT.AUTH_SESSION}`,
+                // 'Referer': ENVIRONMENT.HOST,
             }
         };
 

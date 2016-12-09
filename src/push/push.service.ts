@@ -4,8 +4,15 @@ import { PlatformService } from '../index';
 import { PushServiceBrowser } from './push.browser';
 import { PushServiceIonic } from './push.ionic';
 
+export interface IPushNotification {
+    title: string;
+    message: string;
+    data?: any;
+}
+
 export interface IPushService {
     onSubscribed: Observable<string>;
+    onShowNotitication: Observable<IPushNotification>;
     init();
     subscribe();
     unsubscribe();
@@ -13,6 +20,7 @@ export interface IPushService {
 
 export abstract class PushService implements IPushService {
     public onSubscribed: Observable<string>;
+    public onShowNotitication: Observable<IPushNotification>;
     public abstract init();
     public abstract subscribe();
     public abstract unsubscribe();
