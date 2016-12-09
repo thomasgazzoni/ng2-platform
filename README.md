@@ -29,7 +29,7 @@ NOTE: the code is not yet optimize but it works in most of the case.
 
 ## Install
 ```sh
-npm install thomasgaz/ng2-platform
+npm install ng2-platform
 ```
 
 ## How it works

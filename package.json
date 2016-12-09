@@ -35,7 +35,7 @@
     "scripts": {
         "clean": "rimraf node_modules && rimraf lib",
         "lint": "tslint --force --format verbose \"src/**/*.ts\"",
-        "build": "npm run clean && cnpm install && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+        "build": "npm run clean && npm install && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
         "test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*-spec.ts",
         "watch": "npm run build -- --watch",
         "watch:test": "npm run test -- --watch"
@@ -45,6 +45,7 @@
         "@angular/compiler": "2.2.4",
         "@angular/core": "2.2.4",
         "@angular/http": "2.2.4",
+        "@angular/platform-browser": "2.2.4",
         "core-js": "^2.4.1",
         "ionic-native": "2.2.3",
         "localforage": "1.4.3",
