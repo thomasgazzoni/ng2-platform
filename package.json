@@ -38,7 +38,8 @@
         "build": "npm run clean && npm install && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
         "test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*-spec.ts",
         "watch": "npm run build -- --watch",
-        "watch:test": "npm run test -- --watch"
+        "watch:test": "npm run test -- --watch",
+        "prepublish": "npm run build"
     },
     "dependencies": {
         "@angular/common": "2.2.4",

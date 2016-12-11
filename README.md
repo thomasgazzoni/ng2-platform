@@ -80,14 +80,15 @@ export class EditProfileComponent implements OnInit, OnDestroy {
                 return Observable.empty();
             })
             .subscribe((dataURI) => {
-                const uploadPic = this._uploadService.upload<string>('/api/user/logo/', 'avatar_url', dataURI);
+                const uploadPic = this._uploadService
+                    .upload<string>('/api/user/logo/', 'avatar_url', dataURI);
 
-                uploadLogo.uploadProgress$
+                uploadPic.uploadProgress$
                     .subscribe((progress) => {
-                        console.info('Uploading progress', progress);
+                        console.info('Uploading in progress', progress);
                     });
 
-                uploadLogo.uploadResult$
+                uploadPic.uploadResult$
                     .catch((error) => {
                         console.error('Upload error', error);
                         return Observable.empty();
