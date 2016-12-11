@@ -18,8 +18,17 @@
         "**/*-spec.ts",
         "node_modules"
     ],
+    "files": [
+        "src/declarations.d.ts",
+        "index.ts",
+        "ng2-platform.ts"
+    ],
     "compileOnSave": false,
     "atom": {
         "rewriteTsconfig": false
+    },
+    "angularCompilerOptions": {
+        "genDir": "aot",
+        "skipMetadataEmit": false
     }
 }

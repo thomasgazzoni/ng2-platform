@@ -6,7 +6,7 @@
   "homepage": "https://github.com/thomasgazzoni/ng2-platform#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thomasgazzoni/ng2-platform.git"
+    "url": "https://github.com/thomasgazzoni/ng2-platform.git"
   },
   "bugs": {
     "url": "https://github.com/thomasgazzoni/ng2-platform/issues"
@@ -35,10 +35,11 @@
   "scripts": {
     "clean": "rimraf node_modules && rimraf lib",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
-    "build": "npm run clean && npm install && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "build": "npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
     "test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*-spec.ts",
     "watch": "npm run build -- --watch",
-    "watch:test": "npm run test -- --watch"
+    "watch:test": "npm run test -- --watch",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "@angular/common": "^2.2.3",
