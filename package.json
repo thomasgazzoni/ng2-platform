@@ -30,39 +30,37 @@
     "storage",
     "upload"
   ],
-  "main": "lib/platform.module.js",
-  "typings": "lib/platform.module.d.ts",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "clean": "rimraf node_modules && rimraf lib",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
     "build": "npm run clean && npm install && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
     "test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*-spec.ts",
     "watch": "npm run build -- --watch",
-    "watch:test": "npm run test -- --watch",
-    "prepublish": "npm run build"
+    "watch:test": "npm run test -- --watch"
   },
-  "dependencies": {
-    "@angular/common": "2.2.4",
-    "@angular/compiler": "2.2.4",
-    "@angular/core": "2.2.4",
-    "@angular/http": "2.2.4",
-    "@angular/platform-browser": "2.2.4",
-    "core-js": "^2.4.1",
+  "devDependencies": {
+    "@angular/common": "^2.2.3",
+    "@angular/compiler": "^2.2.3",
+    "@angular/compiler-cli": "^2.2.3",
+    "@angular/core": "^2.2.3",
+    "@angular/http": "^2.2.3",
+    "@angular/platform-browser": "^2.2.3",
+    "@angular/platform-browser-dynamic": "^2.2.3",
     "ionic-native": "2.2.3",
     "localforage": "1.4.3",
     "reflect-metadata": "^0.1.8",
-    "rxjs": "5.0.0-beta.12",
-    "zone.js": "^0.6.25"
-  },
-  "devDependencies": {
+    "rxjs": "5.0.0-rc.4",
+    "zone.js": "^0.7.2",
     "@types/electron": "1.4.29",
     "@types/service_worker_api": "0.0.6",
+    "@types/node": "^6.0.51",
     "chai": "^3.5.0",
     "mocha": "^3.1.2",
     "rimraf": "^2.5.4",
-    "ts-node": "^1.2.2",
     "tslint": "^4.0.2",
-    "typescript": "2.0.3"
+    "typescript": "2.1.4"
   },
   "engines": {
     "node": ">=4.0.0"

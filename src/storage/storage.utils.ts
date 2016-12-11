@@ -1,6 +1,9 @@
 import { Observable, Observer } from 'rxjs/Rx';
 import localforage from 'localforage';
 
+// TODO: need to fix this typing issue
+type LocalForage = any;
+
 import { PlatformService } from '../index';
 
 /**
