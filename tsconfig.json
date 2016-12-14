@@ -22,7 +22,7 @@
         "outDir": "./lib"
     },
     "exclude": [
-        "lib",
+        "bundles",
         "**/*-spec.ts",
         "node_modules"
     ],

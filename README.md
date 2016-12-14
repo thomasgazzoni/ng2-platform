@@ -32,9 +32,16 @@ NOTE: the code is not yet optimize but it works in most of the case.
 npm install ng2-platform
 ```
 
-For Ionic 2, you must add to your project the cordova plugins needed by the features
+For Ionic 2, for each feature you will use in your project you must add the correspondent cordova plugin.
 ```sh
-ionic plugin add
+ionic plugin add phonegap-plugin-push --variable SENDER_ID="1000791411599"
+ionic plugin add phonegap-plugin-barcodescanne
+ionic plugin add cordova-plugin-device
+ionic plugin add cordova-plugin-x-socialsharing
+ionic plugin add cordova-plugin-camera
+ionic plugin add cordova-plugin-geolocation
+ionic plugin add cordova-plugin-file
+ionic plugin add cordova-plugin-file-transfer
 ```
 
 ## How it works
