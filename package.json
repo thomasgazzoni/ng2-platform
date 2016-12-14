@@ -1,7 +1,7 @@
 {
   "name": "ng2-platform",
   "description": "Cross platforms (Browser, Mobile and Desktop) feature with Angular2, Ionic2 and Electron",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "license": "MIT",
   "homepage": "https://github.com/thomasgazzoni/ng2-platform#readme",
   "repository": {
