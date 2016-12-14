@@ -34,7 +34,7 @@ npm install ng2-platform
 
 For Ionic 2, for each feature you will use in your project you must add the correspondent cordova plugin.
 ```sh
-ionic plugin add phonegap-plugin-push --variable SENDER_ID="1000791411599"
+ionic plugin add phonegap-plugin-push --variable SENDER_ID="1234567890"
 ionic plugin add phonegap-plugin-barcodescanne
 ionic plugin add cordova-plugin-device
 ionic plugin add cordova-plugin-x-socialsharing

@@ -41,9 +41,9 @@
     "watch:test": "npm run test -- --watch",
     "prepublish": "npm run build"
   },
-  "devDependencies": {
-    "@angular/common": "2.2.3",
+  "dependencies": {
     "@angular/compiler": "2.2.3",
+    "@angular/common": "2.2.3",
     "@angular/core": "2.2.3",
     "@angular/forms": "2.2.3",
     "@angular/http": "2.2.3",
@@ -53,15 +53,17 @@
     "rxjs": "5.0.0-beta.12",
     "zone.js": "0.6.23",
     "ionic-native": "2.2.3",
-    "localforage": "1.4.3",
+    "localforage": "1.4.3"
+  },
+  "devDependencies": {
     "@angular/compiler-cli": "2.2.3",
     "@angular/platform-server": "2.2.3",
     "@types/electron": "1.4.29",
     "@types/service_worker_api": "0.0.6",
     "@types/node": "^6.0.51",
     "rimraf": "^2.5.4",
-    "tslint": "^3.0.0",
-    "typescript": "2.0.10"
+    "tslint": "^3.15.1",
+    "typescript": "2.0.3"
   },
   "engines": {
     "node": ">=4.0.0"
