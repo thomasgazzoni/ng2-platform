@@ -1,16 +1,24 @@
 {
     "compilerOptions": {
-        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "node",
+        "target": "es5",
+        "module": "es2015",
         "declaration": true,
+        "sourceMap": false,
+        "allowSyntheticDefaultImports": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "noEmitHelpers": false,
+        "noImplicitAny": false,
+        "skipLibCheck": true,
+        "stripInternal": true,
         "lib": [
             "dom",
             "es2015"
         ],
-        "module": "es2015",
-        "moduleResolution": "node",
-        "target": "es5",
+        "types": [
+            "node"
+        ],
         "outDir": "./lib"
     },
     "exclude": [
@@ -20,8 +28,7 @@
     ],
     "files": [
         "src/declarations.d.ts",
-        "index.ts",
-        "ng2-platform.ts"
+        "src/index.ts"
     ],
     "compileOnSave": false,
     "atom": {

@@ -31,46 +31,7 @@ import {
         // Directives
     ],
     providers: [
-        {
-            provide: CameraService,
-            useFactory: cameraServiceFactory,
-            deps: [PlatformService]
-        },
-        {
-            provide: ClipboardService,
-            useFactory: clipboardServiceFactory,
-            deps: [PlatformService]
-        },
-        {
-            provide: LocationService,
-            useFactory: locationServiceFactory,
-            deps: [PlatformService]
-        },
-        {
-            provide: PushService,
-            useFactory: pushServiceFactory,
-            deps: [PlatformService]
-        },
-        {
-            provide: QrcodeService,
-            useFactory: qrcodeServiceFactory,
-            deps: [PlatformService, Http]
-        },
-        {
-            provide: ShareService,
-            useFactory: shareServiceFactory,
-            deps: [PlatformService]
-        },
-        {
-            provide: StorageService,
-            useFactory: storageServiceFactory,
-            deps: [PlatformService]
-        },
-        {
-            provide: UploadService,
-            useFactory: uploadServiceFactory,
-            deps: [PlatformService]
-        },
+
     ],
 })
 export class PlatformModule {
@@ -82,19 +43,59 @@ export class PlatformModule {
         }
     }
 
-    static forRoot(config: IPlatformConfig = {} as any): ModuleWithProviders {
+    static forRoot(platformConfig: IPlatformConfig = {} as any): ModuleWithProviders {
 
         return {
             ngModule: PlatformModule,
             providers: [
                 {
                     provide: PLATFORM_CONFIG_TOKEN,
-                    useValue: config
+                    useValue: platformConfig
                 },
                 {
                     provide: PlatformService,
                     useFactory: setupPlatformConfig,
                     deps: [PLATFORM_CONFIG_TOKEN]
+                },
+                {
+                    provide: CameraService,
+                    useFactory: cameraServiceFactory,
+                    deps: [PlatformService]
+                },
+                {
+                    provide: ClipboardService,
+                    useFactory: clipboardServiceFactory,
+                    deps: [PlatformService]
+                },
+                {
+                    provide: LocationService,
+                    useFactory: locationServiceFactory,
+                    deps: [PlatformService]
+                },
+                {
+                    provide: PushService,
+                    useFactory: pushServiceFactory,
+                    deps: [PlatformService]
+                },
+                {
+                    provide: QrcodeService,
+                    useFactory: qrcodeServiceFactory,
+                    deps: [PlatformService, Http]
+                },
+                {
+                    provide: ShareService,
+                    useFactory: shareServiceFactory,
+                    deps: [PlatformService]
+                },
+                {
+                    provide: StorageService,
+                    useFactory: storageServiceFactory,
+                    deps: [PlatformService]
+                },
+                {
+                    provide: UploadService,
+                    useFactory: uploadServiceFactory,
+                    deps: [PlatformService]
                 },
             ]
         };

@@ -9,3 +9,4 @@ export * from './qrcode/qrcode.service';
 export * from './share/share.service';
 export * from './storage/storage.service';
 export * from './upload/upload.service';
+export * from './platform.module';

@@ -32,6 +32,11 @@ NOTE: the code is not yet optimize but it works in most of the case.
 npm install ng2-platform
 ```
 
+For Ionic 2, you must add to your project the cordova plugins needed by the features
+```sh
+ionic plugin add
+```
+
 ## How it works
 Each Feature have a:
  - **XxxService**: containing the abstract feature declaration (with options and result interface)
@@ -41,8 +46,13 @@ Each Feature have a:
 ## Exemple
 
  - In your app main module
-```Typescript
+```ts
+// app.module.ts
+import { PlatformModule } from 'ng2-platform';
+...
+
 @NgModule({
+    ...
     imports: [
         ... // your modules
         PlatformModule.forRoot({
@@ -50,14 +60,18 @@ Each Feature have a:
             appVersion: '1.0'
         }),
     ]
+    ...
 })
 export class AppModule ...
 ```
 
  - Example for take a picture using the Camera on browser
-```Typescript
-... // Angular 2 and custom imports
+```ts
+// app.component.ts
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CameraService, UploadService } from 'ng2-platform';
+...
 
 @Component({
     selector: 'us-edit-profile',
@@ -80,15 +94,15 @@ export class EditProfileComponent implements OnInit, OnDestroy {
                 return Observable.empty();
             })
             .subscribe((dataURI) => {
-                const uploadPic = this._uploadService
+                const uploadAvatar = this._uploadService
                     .upload<string>('/api/user/logo/', 'avatar_url', dataURI);
 
-                uploadPic.uploadProgress$
+                uploadAvatar.uploadProgress$
                     .subscribe((progress) => {
                         console.info('Uploading in progress', progress);
                     });
 
-                uploadPic.uploadResult$
+                uploadAvatar.uploadResult$
                     .catch((error) => {
                         console.error('Upload error', error);
                         return Observable.empty();

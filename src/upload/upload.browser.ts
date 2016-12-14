@@ -91,7 +91,6 @@ export class UploadServiceBrowser extends UploadUtils implements IUploadService 
                 };
 
                 xhr.onreadystatechange = () => {
-                    console.debug('onreadystatechange .readyState', xhr.readyState);
 
                     if (xhr.readyState === XMLHttpRequest.DONE) {
 
@@ -107,7 +106,7 @@ export class UploadServiceBrowser extends UploadUtils implements IUploadService 
                                 headers: [], // xhr.getAllResponseHeaders()
                             });
                         } else {
-                            observer.error(`Upload file error ${xhr.statusText}`);
+                            observer.error(`${xhr.statusText}`);
                         }
                         observer.complete();
                     }

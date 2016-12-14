@@ -1,6 +1,7 @@
 
 export class PlatformService {
     private _appName: string;
+    private _appVersion: string;
     private _isMobile: boolean;
     private _isDesktop: boolean;
     private _isWeb: boolean;
@@ -59,7 +60,7 @@ export class PlatformService {
 
     public setAppInfo(name: string, version: string) {
         this._appName = name;
-        this._appName = name;
+        this._appVersion = version;
     }
 
 }
