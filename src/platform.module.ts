@@ -34,19 +34,19 @@ import {
 
     ],
 })
-export class PlatformModule {
+export class Ng2PlatformModule {
 
-    constructor( @Optional() @SkipSelf() parentModule: PlatformModule) {
+    constructor( @Optional() @SkipSelf() parentModule: Ng2PlatformModule) {
         if (parentModule) {
             throw new Error(
-                'PlatformModule is already loaded. Import it in the AppModule only');
+                'Ng2PlatformModule is already loaded. Import it in the AppModule only');
         }
     }
 
     static forRoot(platformConfig: IPlatformConfig = {} as any): ModuleWithProviders {
 
         return {
-            ngModule: PlatformModule,
+            ngModule: Ng2PlatformModule,
             providers: [
                 {
                     provide: PLATFORM_CONFIG_TOKEN,

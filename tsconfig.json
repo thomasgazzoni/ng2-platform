@@ -1,39 +1,36 @@
 {
     "compilerOptions": {
-        "moduleResolution": "node",
         "target": "es5",
-        "module": "es2015",
-        "declaration": true,
-        "sourceMap": false,
-        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "node",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "sourceMap": false,
         "noEmitHelpers": false,
-        "noImplicitAny": false,
+        "noImplicitAny": true,
+        "declaration": true,
         "skipLibCheck": true,
         "stripInternal": true,
         "lib": [
-            "dom",
-            "es2015"
+            "es6",
+            "dom"
         ],
+        "rootDir": ".",
         "types": [
             "node"
-        ],
-        "outDir": "./lib"
+        ]
     },
+    "include": [
+        "src/**/*.ts"
+    ],
     "exclude": [
+        "node_modules",
         "bundles",
-        "**/*-spec.ts",
-        "node_modules"
+        "dist"
     ],
     "files": [
-        "src/declarations.d.ts",
-        "src/index.ts"
+        "index.ts",
+        "ng2-platform.ts"
     ],
-    "compileOnSave": false,
-    "atom": {
-        "rewriteTsconfig": false
-    },
     "angularCompilerOptions": {
         "genDir": "aot",
         "skipMetadataEmit": false
