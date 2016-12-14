@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 
-import { PlatformService } from '../index';
+import { PlatformService } from '../platform.service';
 import { ClipboardServiceBrowser } from './clipboard.browser';
 import { ClipboardServiceIonic } from './clipboard.ionic';
 import { ClipboardServiceElectron } from './clipboard.electron';

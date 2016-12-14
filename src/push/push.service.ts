@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Rx';
 
-import { PlatformService } from '../index';
+import { PlatformService } from '../platform.service';
 import { PushServiceBrowser } from './push.browser';
 import { PushServiceIonic } from './push.ionic';
 

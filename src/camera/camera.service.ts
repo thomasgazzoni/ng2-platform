@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 
-import { PlatformService } from '../index';
+import { PlatformService } from '../platform.service';
 import { CameraServiceBrowser } from './camera.browser';
 import { CameraServiceIonic } from './camera.ionic';
 

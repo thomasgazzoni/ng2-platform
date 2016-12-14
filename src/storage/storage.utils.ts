@@ -4,7 +4,7 @@ import localforage from 'localforage';
 // TODO: need to fix this typing issue
 type LocalForage = any;
 
-import { PlatformService } from '../index';
+import { PlatformService } from '../platform.service';
 
 /**
  * StorageUtils

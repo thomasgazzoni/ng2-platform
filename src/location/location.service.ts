@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 
-import { PlatformService } from '../index';
+import { PlatformService } from '../platform.service';
 import { LocationServiceBrowser } from './location.browser';
 import { LocationServiceIonic } from './location.ionic';
 

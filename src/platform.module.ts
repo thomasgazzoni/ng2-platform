@@ -7,16 +7,37 @@ import { HttpModule } from '@angular/http';
 import { Http } from '@angular/http';
 import {
     PlatformService,
-    IPlatformConfig, PLATFORM_CONFIG_TOKEN, setupPlatformConfig,
+} from './platform.service';
+import {
+    IPlatformConfig
+} from './config/config.model';
+import {
+    PLATFORM_CONFIG_TOKEN, setupPlatformConfig,
+} from './config/config.token';
+import {
     CameraService, cameraServiceFactory,
+} from './camera/camera.service';
+import {
     ClipboardService, clipboardServiceFactory,
-    LocationService, locationServiceFactory,
+} from './clipboard/clipboard.service';
+import {
+    LocationService, locationServiceFactory
+} from './location/location.service';
+import {
     PushService, pushServiceFactory,
+} from './push/push.service';
+import {
     QrcodeService, qrcodeServiceFactory,
+} from './qrcode/qrcode.service';
+import {
     ShareService, shareServiceFactory,
+} from './share/share.service';
+import {
     StorageService, storageServiceFactory,
+} from './storage/storage.service';
+import {
     UploadService, uploadServiceFactory,
-} from './index';
+} from './upload/upload.service';
 
 @NgModule({
     imports: [

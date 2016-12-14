@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 
-import { PlatformService } from '../index';
+import { PlatformService } from '../platform.service';
 import { ShareServiceBrowser } from './share.browser';
 import { ShareServiceIonic } from './share.ionic';
 

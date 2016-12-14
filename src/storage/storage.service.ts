@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 
-import { PlatformService } from '../index';
+import { PlatformService } from '../platform.service';
 import { StorageServiceBrowser } from './storage.browser';
 import { StorageServiceIonic } from './storage.ionic';
 

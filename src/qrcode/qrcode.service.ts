@@ -1,7 +1,7 @@
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { PlatformService } from '../index';
+import { PlatformService } from '../platform.service';
 import { QrcodeServiceBrowser } from './qrcode.browser';
 import { QrcodeServiceIonic } from './qrcode.ionic';
 
