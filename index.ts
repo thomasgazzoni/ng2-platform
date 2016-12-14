@@ -1,13 +1,13 @@
-export * from './src/platform.service';
-export * from './src/config/config.model';
-export * from './src/config/config.token';
-export * from './src/camera/camera.service';
-export * from './src/clipboard/clipboard.service';
-export * from './src/location/location.service';
-export * from './src/push/push.service';
-export * from './src/qrcode/qrcode.service';
-export * from './src/share/share.service';
-export * from './src/storage/storage.service';
-export * from './src/upload/upload.service';
+export * from './lib/platform.service';
+export * from './lib/config/config.model';
+export * from './lib/config/config.token';
+export * from './lib/camera/camera.service';
+export * from './lib/clipboard/clipboard.service';
+export * from './lib/location/location.service';
+export * from './lib/push/push.service';
+export * from './lib/qrcode/qrcode.service';
+export * from './lib/share/share.service';
+export * from './lib/storage/storage.service';
+export * from './lib/upload/upload.service';
 
-export { Ng2PlatformModule } from './src/platform.module';
+export { Ng2PlatformModule } from './lib/platform.module';

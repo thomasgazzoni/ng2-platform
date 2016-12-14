@@ -55,14 +55,14 @@ Each Feature have a:
  - In your app main module
 ```ts
 // app.module.ts
-import { PlatformModule } from 'ng2-platform';
+import { Ng2PlatformModule } from 'ng2-platform';
 ...
 
 @NgModule({
     ...
     imports: [
         ... // your modules
-        PlatformModule.forRoot({
+        Ng2PlatformModule.forRoot({
             appName: 'MyApp',
             appVersion: '1.0'
         }),
