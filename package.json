@@ -11,8 +11,9 @@
   "bugs": {
     "url": "https://github.com/thomasgazzoni/ng2-platform/issues"
   },
-  "main": "index.js",
-  "typings": "index.d.ts",
+  "main": "./lib/index.js",
+  "module": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
   "author": "Thomas Gazzoni <thomas.gazzoni@gmail.com>",
   "keywords": [
     "Electron",
@@ -35,8 +36,7 @@
     "watch:test": "npm run test --watch",
     "prepublish": "npm run build"
   },
-  "devDependencies": {
-    "@angular/compiler": "2.2.3",
+  "dependencies": {
     "@angular/common": "2.2.3",
     "@angular/core": "2.2.3",
     "@angular/forms": "2.2.3",
@@ -48,10 +48,13 @@
     "zone.js": "0.6.23",
     "ionic-native": "2.2.3",
     "localforage": "1.4.3",
+    "@types/electron": "1.4.29",
+    "@types/service_worker_api": "0.0.6"
+  },
+  "devDependencies": {
+    "@angular/compiler": "2.2.3",
     "@angular/compiler-cli": "2.2.3",
     "@angular/platform-server": "2.2.3",
-    "@types/electron": "1.4.29",
-    "@types/service_worker_api": "0.0.6",
     "@types/node": "^6.0.51",
     "rimraf": "^2.5.4",
     "tslint": "^3.15.1",
