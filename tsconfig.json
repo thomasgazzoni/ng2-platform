@@ -16,8 +16,8 @@
         ],
         "rootDir": ".",
         "outDir": "./lib",
-        "types": [
-            "node"
+        "typeRoots": [
+            "./node_modules/@types"
         ]
     },
     "exclude": [

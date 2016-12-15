@@ -1,8 +1,5 @@
 import { Observable, Observer } from 'rxjs/Rx';
-import localforage from 'localforage';
-
-// TODO: need to fix this typing issue
-type LocalForage = any;
+import * as localForage from 'localforage';
 
 import { PlatformService } from '../platform.service';
 
@@ -16,20 +13,21 @@ export class StorageUtils {
     constructor(
         platformService: PlatformService
     ) {
-        const dbConfig = {
+
+        const dbConfig: LocalForageOptions = {
             name: platformService.appName,
-            version: '3',
+            version: 3,
             size: 4980736, // Size of database, in bytes. WebSQL-only for now.
             storeName: `${platformService.appName}_db`, // Should be alphanumeric, with underscores.
             description: 'Data db',
         };
 
-        this._db = localforage.createInstance(dbConfig);
+        this._db = localForage.createInstance(dbConfig);
 
         this._db.setDriver([
-            localforage.INDEXEDDB,
-            localforage.WEBSQL,
-            localforage.LOCALSTORAGE,
+            localForage.INDEXEDDB,
+            localForage.WEBSQL,
+            localForage.LOCALSTORAGE,
         ]);
 
         this._db.length(); // Init db now
