@@ -2,20 +2,21 @@
     "compilerOptions": {
         "target": "es5",
         "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "sourceMap": true,
-        "noEmitHelpers": true,
+        "noEmitHelpers": false,
         "noImplicitAny": false,
         "declaration": true,
         "skipLibCheck": true,
-        "stripInternal": false,
+        "stripInternal": true,
         "lib": [
             "es6",
             "dom"
         ],
         "rootDir": ".",
-        "outDir": "./lib",
+        "outDir": "./dist",
         "typeRoots": [
             "./node_modules/@types"
         ]
@@ -26,7 +27,7 @@
         "dist"
     ],
     "angularCompilerOptions": {
-        "genDir": "./lib",
+        "genDir": "./dist",
         "skipTemplateCodegen": true,
         "debug": true
     }

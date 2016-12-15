@@ -11,9 +11,9 @@
   "bugs": {
     "url": "https://github.com/thomasgazzoni/ng2-platform/issues"
   },
-  "main": "./lib/index.js",
-  "module": "./lib/index.js",
-  "typings": "./lib/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "author": "Thomas Gazzoni <thomas.gazzoni@gmail.com>",
   "keywords": [
     "Electron",
@@ -28,10 +28,10 @@
     "upload"
   ],
   "scripts": {
-    "clean": "rimraf node_modules && rimraf lib",
+    "clean": "rimraf node_modules && rimraf dist",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
     "build": "./node_modules/.bin/ngc -p tsconfig.json",
-    "test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*-spec.ts",
+    "test": "npm run build && mocha --compilers ts:ts-node/register --recursive src/**/*.spec.ts",
     "watch": "npm run build --watch",
     "watch:test": "npm run test --watch",
     "prepublish": "npm run build"
@@ -55,8 +55,11 @@
   "devDependencies": {
     "@angular/compiler": "2.2.3",
     "@angular/compiler-cli": "2.2.3",
+    "@types/jasmine": "^2.5.38",
     "@types/node": "^6.0.51",
+    "mocha": "^3.2.0",
     "rimraf": "^2.5.4",
+    "ts-node": "^1.7.2",
     "tslint": "^3.15.1",
     "typescript": "2.0.3"
   },
