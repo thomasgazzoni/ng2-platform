@@ -44,9 +44,7 @@ export abstract class UploadService implements IUploadService {
     public abstract getFileToUpload(data: string | File): Blob;
 }
 
-// TODO: Could use a prefab ng2 uploader component which handles HTML5 File Uploads
-export function uploadServiceFactory(
-    platformService: PlatformService): IUploadService {
+export function uploadServiceFactory(platformService: PlatformService): IUploadService {
 
     if (platformService.isMobile) {
         return new UploadServiceIonic();

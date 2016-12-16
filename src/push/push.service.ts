@@ -29,8 +29,8 @@ export abstract class PushService implements IPushService {
 export function pushServiceFactory(platformService: PlatformService): IPushService {
 
     if (platformService.isMobile) {
-        return new PushServiceIonic();
+        return new PushServiceIonic(platformService);
     }
 
-    return new PushServiceBrowser();
+    return new PushServiceBrowser(platformService);
 }

@@ -5,12 +5,19 @@ import {
     PushOptions,
 } from 'ionic-native';
 
+import { PlatformService } from '../platform.service';
 import { PushUtils } from './push.utils';
 import { IPushService } from './push.service';
 
 export class PushServiceIonic extends PushUtils implements IPushService {
 
     private push: PushNotification;
+
+    constructor(
+        private _platformService: PlatformService
+    ) {
+        super();
+    }
 
     public init() {
 
@@ -25,7 +32,7 @@ export class PushServiceIonic extends PushUtils implements IPushService {
 
         const options: PushOptions = {
             android: {
-                senderID: '1000791411599'
+                senderID: this._platformService.FCMSenderId
             },
             ios: {
                 alert: true,

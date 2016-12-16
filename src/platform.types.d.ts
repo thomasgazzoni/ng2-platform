@@ -5,12 +5,9 @@ interface Window {
 
 interface Navigator {
     share: any;
-    serviceWorker: any;
 }
 
 interface PushSubscription {
-    endpoint: string;
-    subscriptionId: string;
     unsubscribe();
 }
 

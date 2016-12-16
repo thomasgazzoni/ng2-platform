@@ -18,9 +18,7 @@ export abstract class StorageService implements IStorageService {
     public abstract clear(): Observable<void>;
 }
 
-// TODO: Could use a prefab ng2 uploader component which handles HTML5 File Uploads
-export function storageServiceFactory(
-    platformService: PlatformService): IStorageService {
+export function storageServiceFactory(platformService: PlatformService): IStorageService {
 
     if (platformService.isMobile) {
         return new StorageServiceIonic(platformService);

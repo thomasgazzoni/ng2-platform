@@ -12,7 +12,7 @@ import {
     IPlatformConfig
 } from './config/config.model';
 import {
-    PLATFORM_CONFIG_TOKEN, setupPlatformConfig,
+    PLATFORM_CONFIG_TOKEN, platformServiceFactory,
 } from './config/config.token';
 import {
     CameraService, cameraServiceFactory,
@@ -20,6 +20,9 @@ import {
 import {
     ClipboardService, clipboardServiceFactory,
 } from './clipboard/clipboard.service';
+import {
+    DownloadService, downloadServiceFactory,
+} from './download/download.service';
 import {
     LocationService, locationServiceFactory
 } from './location/location.service';
@@ -43,11 +46,10 @@ import {
     imports: [
         HttpModule,
     ],
-    declarations: [
-        // Components
-        // Directives
-    ],
     exports: [
+
+    ],
+    declarations: [
         // Components
         // Directives
     ],
@@ -64,7 +66,11 @@ export class Ng2PlatformModule {
         }
     }
 
-    static forRoot(platformConfig: IPlatformConfig = {} as any): ModuleWithProviders {
+    static forRoot(platformConfig: IPlatformConfig = {
+        appName: '',
+        appVersion: '',
+        FCMSenderId: undefined,
+    }): ModuleWithProviders {
 
         return {
             ngModule: Ng2PlatformModule,
@@ -75,7 +81,7 @@ export class Ng2PlatformModule {
                 },
                 {
                     provide: PlatformService,
-                    useFactory: setupPlatformConfig,
+                    useFactory: platformServiceFactory,
                     deps: [PLATFORM_CONFIG_TOKEN]
                 },
                 {
@@ -86,6 +92,11 @@ export class Ng2PlatformModule {
                 {
                     provide: ClipboardService,
                     useFactory: clipboardServiceFactory,
+                    deps: [PlatformService]
+                },
+                {
+                    provide: DownloadService,
+                    useFactory: downloadServiceFactory,
                     deps: [PlatformService]
                 },
                 {

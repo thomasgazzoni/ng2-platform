@@ -46,8 +46,6 @@ export class StorageUtils {
 
     set(keyName: string, value: any) {
 
-        console.debug('Storage Set', keyName, value);
-
         return Observable
             .fromPromise(this._db.setItem(keyName, value))
             .catch((error) => {

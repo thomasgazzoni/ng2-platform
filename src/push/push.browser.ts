@@ -1,10 +1,17 @@
 import { Observable, Observer } from 'rxjs/Rx';
 import { Push } from 'ionic-native';
 
+import { PlatformService } from '../platform.service';
 import { PushUtils } from './push.utils';
 import { IPushService } from './push.service';
 
 export class PushServiceBrowser extends PushUtils implements IPushService {
+
+    constructor(
+        private _platformService: PlatformService
+    ) {
+        super();
+    }
 
     // Once the service worker is registered set the initial state
     public init() {

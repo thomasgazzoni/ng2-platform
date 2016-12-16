@@ -4,13 +4,13 @@ import { PlatformService } from '../platform.service';
 
 export const PLATFORM_CONFIG_TOKEN = new OpaqueToken('PLATFORM_CONFIG_TOKEN');
 
-export function setupPlatformConfig(platformConfig: IPlatformConfig): PlatformService {
+export function platformServiceFactory(platformConfig: IPlatformConfig): PlatformService {
 
     const platform = new PlatformService();
 
     // TODO: make sure cordova device is already initialized by now
 
-    platform.setAppInfo(platformConfig.appName, platformConfig.appVersion);
+    platform.setConfig(platformConfig);
     platform.runGuessPlatform();
 
     return platform;

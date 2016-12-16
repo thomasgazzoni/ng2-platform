@@ -1,5 +1,14 @@
+import { Injectable } from '@angular/core';
 
+import { IPlatformConfig } from './config/config.model';
+
+/**
+ * PlatformService
+ */
+@Injectable()
 export class PlatformService {
+
+    private _config: IPlatformConfig;
     private _appName: string;
     private _appVersion: string;
     private _isMobile: boolean;
@@ -28,12 +37,12 @@ export class PlatformService {
         return this._isAndroid;
     }
 
-    public static get isMobile(): boolean {
-        return !!window.cordova;
-    }
-
     public get appName(): string {
         return this._appName;
+    }
+
+    public get FCMSenderId(): string {
+        return 'da';
     }
 
     constructor() {
@@ -47,20 +56,21 @@ export class PlatformService {
         this.runGuessPlatform();
     }
 
-    public runGuessPlatform(): void {
-        this._isMobile = !!window.cordova;
-        this._isDesktop = !!window.navigator.userAgent.match(/Electron/);
-        this._isWeb = !(this._isMobile || this._isDesktop);
+    public runGuessPlatform() {
+        // this._isMobile = !!window.cordova;
+        // this._isDesktop = !!window.navigator.userAgent.match(/Electron/);
+        // this._isWeb = !(this._isMobile || this._isDesktop);
 
-        if (window.device && window.device.platform) {
-            this._iOS = !!window.device.platform.match(/ios/gi);
-            this._isAndroid = !!window.device.platform.match(/android/gi);
-        }
+        // if (window.device && window.device.platform) {
+        //     this._iOS = !!window.device.platform.match(/ios/gi);
+        //     this._isAndroid = !!window.device.platform.match(/android/gi);
+        // }
     }
 
-    public setAppInfo(name: string, version: string) {
-        this._appName = name;
-        this._appVersion = version;
+    public setConfig(config: IPlatformConfig) {
+        // this._appName = config.appName;
+        // this._appVersion = config.appVersion;
+        // this._config = config;
     }
 
 }
