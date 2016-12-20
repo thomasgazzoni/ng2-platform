@@ -51,28 +51,28 @@ export class PushUtils {
         this._onSubscribed.next(regId);
     }
 
-/**
- * Call this method to dispatch the pushNotification data to any listener of the
- * onShowNotification Observable
- *
- * Ionic 2 Example:
- *
- * ```
- * this._pushService.onShowNotitication.subscribe((pushNotification) => {
- *
- *      LocalNotifications.schedule({
- *          id: 1,
- *          title: `${pushNotification.title}`,
- *          text: `${pushNotification.message}`,
- *          sound: 'file://sound.mp3',
- *          data: pushNotification.data
- *      });
- *
- *      Vibration.vibrate([100, 300, 600]);
- * });
- * ```
- * @stable
- */
+    /**
+     * Call this method to dispatch the pushNotification data to any listener of the
+     * onShowNotification Observable
+     *
+     * Ionic 2 Example:
+     *
+     * ```
+     * this._pushService.onShowNotitication.subscribe((pushNotification) => {
+     *
+     *      LocalNotifications.schedule({
+     *          id: 1,
+     *          title: `${pushNotification.title}`,
+     *          text: `${pushNotification.message}`,
+     *          sound: 'file://sound.mp3',
+     *          data: pushNotification.data
+     *      });
+     *
+     *      Vibration.vibrate([100, 200]);
+     * });
+     * ```
+     * @stable
+     */
     protected showPushNotification(pushNotification: IPushNotification) {
 
         this._onShowNotification.next(pushNotification);

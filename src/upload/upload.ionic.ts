@@ -4,8 +4,6 @@ import { Transfer, FileUploadOptions } from 'ionic-native';
 import { IUploadService, IUploadResult, IFileUploadResult } from './upload.service';
 import { UploadUtils } from './upload.utils';
 
-// import { ENVIRONMENT } from '../../../environments/environment';
-
 export class UploadServiceIonic extends UploadUtils implements IUploadService {
 
     constructor() {
@@ -30,17 +28,13 @@ export class UploadServiceIonic extends UploadUtils implements IUploadService {
         const options: FileUploadOptions = {
             httpMethod: 'POST',
             fileKey: fieldName,
-            headers: {
-                // 'X-CSRFToken': ENVIRONMENT.AUTH_CSRFTOKEN,
-                // 'Cookie': `csrftoken=${ENVIRONMENT.AUTH_CSRFTOKEN}; ftsession=${ENVIRONMENT.AUTH_SESSION}`,
-                // 'Referer': ENVIRONMENT.HOST,
-            }
+            headers: this.apiUploadHeaders,
         };
 
         const fileTransfer = new Transfer();
 
         fileTransfer.onProgress((event) => {
-            console.debug('mobile upload proress', (event.loaded / event.total));
+
             const percent = Math.round((event.loaded / event.total) * 100);
             uploadProgress.next(percent);
 

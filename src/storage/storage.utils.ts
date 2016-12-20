@@ -18,8 +18,8 @@ export class StorageUtils {
             name: platformService.appName,
             version: 3,
             size: 4980736, // Size of database, in bytes. WebSQL-only for now.
-            storeName: `${platformService.appName}_db`, // Should be alphanumeric, with underscores.
-            description: 'Data db',
+            storeName: `${platformService.appName}_db`,
+            description: `${platformService.appName}`,
         };
 
         this._db = localForage.createInstance(dbConfig);

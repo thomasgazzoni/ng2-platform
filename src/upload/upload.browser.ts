@@ -4,8 +4,6 @@ import { Response } from '@angular/http';
 import { IUploadService, IUploadResult, IFileUploadResult } from './upload.service';
 import { UploadUtils } from './upload.utils';
 
-// import { ENVIRONMENT } from '../../../environments/environment';
-
 export class UploadServiceBrowser extends UploadUtils implements IUploadService {
 
     constructor() {
@@ -113,7 +111,13 @@ export class UploadServiceBrowser extends UploadUtils implements IUploadService 
                 };
 
                 xhr.open('POST', url, true);
-                // xhr.setRequestHeader('X-CSRFToken', ENVIRONMENT.AUTH_CSRFTOKEN);
+                // Set extra headers
+                const headersKeys = Object.keys(this.apiUploadHeaders);
+                if (headersKeys) {
+                    headersKeys.forEach((headerKey) => {
+                        xhr.setRequestHeader(headerKey, this.apiUploadHeaders[headerKey]);
+                    });
+                }
                 xhr.withCredentials = true;
                 xhr.send(form);
             });

@@ -8,6 +8,7 @@ export interface IUploadService {
     upload<T>(endpoint: string, fieldName: string, fileDataOrUrl: string | Blob): IUploadResult<T>;
     getFilePreview(data: string | File): Promise<string>;
     getFileToUpload(data: string | File): Blob;
+    setApiHeaders(headers: { [key: string]: string });
 }
 
 export interface IFileUploadResult <T> {
@@ -42,6 +43,7 @@ export abstract class UploadService implements IUploadService {
     public abstract upload<T>(endpoint: string, fieldName: string, fileDataOrUrl: string | Blob): IUploadResult<T>;
     public abstract getFilePreview(data: string | File): Promise<string>;
     public abstract getFileToUpload(data: string | File): Blob;
+    public abstract setApiHeaders(headers: { [key: string]: string });
 }
 
 export function uploadServiceFactory(platformService: PlatformService): IUploadService {

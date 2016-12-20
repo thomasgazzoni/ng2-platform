@@ -42,7 +42,7 @@ export class PlatformService {
     }
 
     public get FCMSenderId(): string {
-        return 'da';
+        return this._config.FCMSenderId;
     }
 
     constructor() {
@@ -57,20 +57,23 @@ export class PlatformService {
     }
 
     public runGuessPlatform() {
-        // this._isMobile = !!window.cordova;
-        // this._isDesktop = !!window.navigator.userAgent.match(/Electron/);
-        // this._isWeb = !(this._isMobile || this._isDesktop);
+        this._isMobile = !!window.cordova;
+        this._isDesktop = !!window.navigator.userAgent.match(/Electron/);
+        this._isWeb = !(this._isMobile || this._isDesktop);
 
-        // if (window.device && window.device.platform) {
-        //     this._iOS = !!window.device.platform.match(/ios/gi);
-        //     this._isAndroid = !!window.device.platform.match(/android/gi);
-        // }
+
+        if (window.device && window.device.platform) {
+            this._iOS = !!window.device.platform.match(/ios/gi);
+            this._isAndroid = !!window.device.platform.match(/android/gi);
+        }
+
+        console.debug('runGuessPlatform', this);
     }
 
     public setConfig(config: IPlatformConfig) {
-        // this._appName = config.appName;
-        // this._appVersion = config.appVersion;
-        // this._config = config;
+        this._appName = config.appName;
+        this._appVersion = config.appVersion;
+        this._config = config;
     }
 
 }

@@ -8,12 +8,13 @@
 # ng2-platform
 
 The aim of this project is provide a cross platforms access to native feature available on Browser, Mobile (Ionic 2) and Desktop (Electron).
-Each Feature will espose a RxJs Observable making their api agnostic among various platform.
+Each Feature will espose methods with RxJs Observable making their api agnostic among various platform.
 
 | Feature | Description | Browser | Ionic2 | Electron |
 | --- | --- | --- | --- | --- |
 | `Camera` | Take or select picture | Available (only take photo) | Available | TODO
 | `Clipboard` | Copy and Paste | Available | Available | Available
+| `Download` | Download file in backgroud | Need improve | TODO | TODO
 | `Location` | Get current position | Available | Available | Available
 | `Push` | Push notification | Available (with SW) | Available | TODO
 | `Qrcode` | Generate and scan QR Code | TODO | Available | TODO
@@ -24,6 +25,7 @@ Each Feature will espose a RxJs Observable making their api agnostic among vario
 
 ## Project status
 This project is just started, I am looking for collaborator to expand the Electron feature (although the implementation will be same as the Browser for most of the case)
+since I am not fully implement that in my work project.
 I will use as much as possible native api for Browser that maybe be available only in latest browser versions.
 NOTE: the code is not yet optimize but it works in most of the case.
 
@@ -32,7 +34,7 @@ NOTE: the code is not yet optimize but it works in most of the case.
 npm install ng2-platform
 ```
 
-For Ionic 2, for each feature you will use in your project you must add the correspondent cordova plugin.
+For Ionic 2, for each feature you will use in your project, you must add the correspondent cordova plugin.
 ```sh
 ionic plugin add phonegap-plugin-push --variable SENDER_ID="1234567890"
 ionic plugin add phonegap-plugin-barcodescanne
@@ -63,8 +65,9 @@ import { Ng2PlatformModule } from 'ng2-platform';
     imports: [
         ... // your modules
         Ng2PlatformModule.forRoot({
-            appName: 'MyApp',
-            appVersion: '1.0'
+            appName: 'MyAppName',
+            appVersion: '1.0',
+            FCMSenderId: '1234567890',
         }),
     ]
     ...
@@ -74,24 +77,32 @@ export class AppModule ...
 
  - Example for take a picture using the Camera on browser
 ```ts
-// app.component.ts
+// custom.component.ts
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CameraService, UploadService } from 'ng2-platform';
 ...
 
 @Component({
-    selector: 'us-edit-profile',
-    templateUrl: 'edit-profile.component.html',
+    selector: 'us-user-profile',
+    templateUrl: 'user-profile.component.html',
     changeDetection: ChangeDetectionStrategy.Default
 })
-export class EditProfileComponent implements OnInit, OnDestroy {
+export class UserProfileComponent implements OnInit {
 
     constructor(
         private _uploadService: UploadService,
         private _cameraService: CameraService,
     ) {
 
+    }
+
+    ngOnInit() {
+        // If the upload API need some custom header you can set it before call the upload method
+        this._uploadService.setApiHeaders({
+            'X-CSRFToken': 'your_token', // Your custom auth token
+            'Referer': 'www.exemple.com', // For Ionic 2 you might need this
+        });
     }
 
     takePhoto() {
@@ -101,6 +112,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
                 return Observable.empty();
             })
             .subscribe((dataURI) => {
+
                 const uploadAvatar = this._uploadService
                     .upload<string>('/api/user/logo/', 'avatar_url', dataURI);
 
@@ -127,8 +139,8 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 ##  Todos
  - Write Tests
  - Add exemple website
- - Implement missing Electron platforms
- - Consider including Cordova Platform
+ - Implementing Electron platforms
+ - Consider add vanilla Cordova platform
 
 License
 ----

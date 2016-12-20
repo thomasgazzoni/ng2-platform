@@ -36,7 +36,6 @@ export class CameraServiceIonic implements ICameraService {
                         observer.complete();
                     })
                     .catch(error => {
-                        console.debug('takePhoto error', error);
                         observer.error(this.getErrorMessage(error));
                         observer.complete();
                     });
@@ -64,7 +63,6 @@ export class CameraServiceIonic implements ICameraService {
                         observer.complete();
                     })
                     .catch(error => {
-                        console.debug('getPhotoLibrary error', error);
                         observer.error(this.getErrorMessage(error));
                         observer.complete();
                     });
@@ -72,14 +70,14 @@ export class CameraServiceIonic implements ICameraService {
     }
 
     private setOptions(cameraOptions: CameraOptions, customOptions: ITakePhotoOptions) {
-        if (customOptions) {
-            cameraOptions.allowEdit = customOptions.allowEdit;
-            cameraOptions.targetWidth = customOptions.imageSize;
-            cameraOptions.targetHeight = customOptions.imageSize;
+         if (customOptions) {
+            cameraOptions.allowEdit = !!customOptions.allowEdit ? customOptions.allowEdit : DEFAULT_TAKE_PHOTO_OPTIONS.allowEdit;
+            cameraOptions.targetWidth = customOptions.imageSize || DEFAULT_TAKE_PHOTO_OPTIONS.imageSize;
+            cameraOptions.targetHeight = customOptions.imageSize || DEFAULT_TAKE_PHOTO_OPTIONS.imageSize;
         } else {
-            cameraOptions.allowEdit = DEFAULT_TAKE_PHOTO_OPTIONS.allowEdit;
-            cameraOptions.targetWidth = DEFAULT_TAKE_PHOTO_OPTIONS.imageSize;
-            cameraOptions.targetHeight = DEFAULT_TAKE_PHOTO_OPTIONS.imageSize;
+            cameraOptions.allowEdit = false;
+            cameraOptions.targetWidth = undefined;
+            cameraOptions.targetHeight = undefined;
         }
     }
 

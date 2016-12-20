@@ -1,4 +1,6 @@
 /node_modules
 /typings
+/src
+/test
 
 /npm-debug.log

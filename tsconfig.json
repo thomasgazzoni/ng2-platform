@@ -24,8 +24,13 @@
         "bundles",
         "dist"
     ],
+    "include": [
+        "index.ts",
+        "src/**/*"
+    ],
     "angularCompilerOptions": {
         "genDir": "./dist",
-        "skipTemplateCodegen": true
+        "debug": false,
+        "skipMetadataEmit": false
     }
 }

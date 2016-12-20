@@ -55,7 +55,7 @@ import {
     ],
     providers: [
 
-    ],
+    ]
 })
 export class Ng2PlatformModule {
 
@@ -66,11 +66,7 @@ export class Ng2PlatformModule {
         }
     }
 
-    static forRoot(platformConfig: IPlatformConfig = {
-        appName: '',
-        appVersion: '',
-        FCMSenderId: undefined,
-    }): ModuleWithProviders {
+    static forRoot(platformConfig: IPlatformConfig = null): ModuleWithProviders {
 
         return {
             ngModule: Ng2PlatformModule,
@@ -128,7 +124,7 @@ export class Ng2PlatformModule {
                     provide: UploadService,
                     useFactory: uploadServiceFactory,
                     deps: [PlatformService]
-                },
+                }
             ]
         };
     }

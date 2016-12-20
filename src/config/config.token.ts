@@ -2,13 +2,17 @@ import { OpaqueToken } from '@angular/core';
 import { IPlatformConfig } from './config.model';
 import { PlatformService } from '../platform.service';
 
-export const PLATFORM_CONFIG_TOKEN = new OpaqueToken('PLATFORM_CONFIG_TOKEN');
+export const PLATFORM_CONFIG_TOKEN = new OpaqueToken('PLATFORMCONFIG');
 
-export function platformServiceFactory(platformConfig: IPlatformConfig): PlatformService {
+export function platformServiceFactory(platformConfig: IPlatformConfig) {
 
     const platform = new PlatformService();
 
-    // TODO: make sure cordova device is already initialized by now
+    platformConfig = platformConfig || {
+        appName: 'app',
+        appVersion: '1.0',
+        FCMSenderId: undefined,
+    };
 
     platform.setConfig(platformConfig);
     platform.runGuessPlatform();

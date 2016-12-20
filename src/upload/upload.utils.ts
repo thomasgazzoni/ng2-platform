@@ -3,8 +3,14 @@
  */
 export class UploadUtils {
 
-    constructor() {
+    protected apiUploadHeaders: { [key: string]: string };
 
+    constructor() {
+        this.apiUploadHeaders = {};
+    }
+
+    setApiHeaders(headers: { [key: string]: string }) {
+        this.apiUploadHeaders = headers;
     }
 
     getFilePreview(data: string | File) {
@@ -81,32 +87,32 @@ export class UploadUtils {
     dataURItoBlob(dataURI: string) {
         // convert base64 to raw binary data held in a string
         // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
-        var byteString = atob(dataURI.split(',')[1]);
+        const byteString = atob(dataURI.split(',')[1]);
 
         // separate out the mime component
-        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+        const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
 
         // write the bytes of the string to an ArrayBuffer
-        var ab = new ArrayBuffer(byteString.length);
-        var ia = new Uint8Array(ab);
+        const ab = new ArrayBuffer(byteString.length);
+        const ia = new Uint8Array(ab);
         for (var i = 0; i < byteString.length; i++) {
             ia[i] = byteString.charCodeAt(i);
         }
 
         // write the ArrayBuffer to a blob, and you're done
-        var blob = new Blob([ab], { type: mimeString });
+        const blob = new Blob([ab], { type: mimeString });
         return blob;
     }
 
     humanizeBytes(bytes: number): string {
+
         if (bytes === 0) {
             return '0 Byte';
         }
-        let k = 1024;
+        const k = 1024;
         const sizes: string[] = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
-        let i: number = Math.floor(Math.log(bytes) / Math.log(k));
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
 
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i] + '/s';
     }
-
 }
