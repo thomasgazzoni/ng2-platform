@@ -12,38 +12,40 @@ Each Feature will espose methods with RxJs Observable making their api agnostic 
 
 | Feature | Description | Browser | Ionic2 | Electron |
 | --- | --- | --- | --- | --- |
+| `Analytics` | Send Google Analytics | Available | Available | Available
 | `Camera` | Take or select picture | Available (only take photo) | Available | TODO
 | `Clipboard` | Copy and Paste | Available | Available | Available
 | `Download` | Download file in backgroud | Need improve | TODO | TODO
-| `Location` | Get current position | Available | Available | Available
+| `Location` | Get current GPS position | Available | Available | Available
 | `Push` | Push notification | Available (with SW) | Available | TODO
 | `Qrcode` | Generate and scan QR Code | TODO | Available | TODO
-| `Share` | Share link on social network | Available (only Chrome) | Available | TODO
+| `Share` | Share link on social network | Available (Chrome Origin Trials) | Available | TODO
 | `Upload` | Upload a file | Available | Available | TODO
 | `Storage` | Localstorage for caching | Available | Available | TODO
 | `Core` | Platform service | Available | Available | Available
 
 ## Project status
-This project is just started, I am looking for collaborator to expand the Electron feature (although the implementation will be same as the Browser for most of the case)
-since I am not fully implement that in my work project.
-I will use as much as possible native api for Browser that maybe be available only in latest browser versions.
-NOTE: the code is not yet optimize but it works in most of the case.
+This project is just started, I am looking for collaborators to expand the Electron's features (although the implementation will be same as the Browser for most of the cases)
+since are not fully implemented/tested at this moment.
+I will use as much as possible native api for the Browser platform this means that things will works only in latest browsers version.
+NOTE: the code is not yet optimize but it works in most of the case, if doesn't work in your use case just open an issues I will be eager to look into it!
 
 ## Install
 ```sh
 npm install ng2-platform
 ```
 
-For Ionic 2, for each feature you will use in your project, you must add the correspondent cordova plugin.
+For Ionic 2 use case, for each feature you will going to use in your project, you must add the correspondent cordova plugin:
 ```sh
-ionic plugin add phonegap-plugin-push --variable SENDER_ID="1234567890"
-ionic plugin add phonegap-plugin-barcodescanne
 ionic plugin add cordova-plugin-device
+ionic plugin add phonegap-plugin-push --variable SENDER_ID="1234567890"
+ionic plugin add phonegap-plugin-barcodescanner
 ionic plugin add cordova-plugin-x-socialsharing
 ionic plugin add cordova-plugin-camera
 ionic plugin add cordova-plugin-geolocation
 ionic plugin add cordova-plugin-file
 ionic plugin add cordova-plugin-file-transfer
+ionic plugin add cordova-plugin-google-analytics
 ```
 
 ## How it works
@@ -75,11 +77,11 @@ import { Ng2PlatformModule } from 'ng2-platform';
 export class AppModule ...
 ```
 
- - Example for take a picture using the Camera on browser
+ - Example for take a picture using the PC/Laptop Camera and upload it to some API
 ```ts
-// custom.component.ts
+// user-profile.component.ts
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { CameraService, UploadService } from 'ng2-platform';
 ...
 
@@ -98,7 +100,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        // If the upload API need some custom header you can set it before call the upload method
+        // If the upload API need some custom headers you can set it before call the upload method
         this._uploadService.setApiHeaders({
             'X-CSRFToken': 'your_token', // Your custom auth token
             'Referer': 'www.exemple.com', // For Ionic 2 you might need this
@@ -118,12 +120,12 @@ export class UserProfileComponent implements OnInit {
 
                 uploadAvatar.uploadProgress$
                     .subscribe((progress) => {
-                        console.info('Uploading in progress', progress);
+                        console.info('Uploading in progress:', progress);
                     });
 
                 uploadAvatar.uploadResult$
                     .catch((error) => {
-                        console.error('Upload error', error);
+                        console.error('Upload error:', error);
                         return Observable.empty();
                     })
                     .subscribe((response) => {
@@ -139,8 +141,8 @@ export class UserProfileComponent implements OnInit {
 ##  Todos
  - Write Tests
  - Add exemple website
- - Implementing Electron platforms
- - Consider add vanilla Cordova platform
+ - Implementing and test on Electron
+ - Consider add vanilla Cordova platform (not bing on ionic-native)
 
 License
 ----

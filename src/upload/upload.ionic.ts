@@ -57,7 +57,7 @@ export class UploadServiceIonic extends UploadUtils implements IUploadService {
                     .then((status: IFileUploadResult<T>) => {
                         uploadProgress.next(100);
                         uploadProgress.complete();
-                        if (status.responseCode === 201) {
+                        if (status.responseCode === 200 || status.responseCode === 201) {
                             status.responseData = JSON.parse(status.response);
                             observer.next(status);
                         } else {

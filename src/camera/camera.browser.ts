@@ -84,7 +84,7 @@ export class CameraServiceBrowser implements ICameraService {
         return Observable
             .create((observer: Observer<string>) => {
 
-                observer.error('Not implemented on desktop yet');
+                observer.error('Not implemented on the browser yet');
                 observer.complete();
 
             });

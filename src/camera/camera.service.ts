@@ -6,7 +6,9 @@ import { CameraServiceIonic } from './camera.ionic';
 
 export const DEFAULT_TAKE_PHOTO_OPTIONS: ITakePhotoOptions = {
     allowEdit: false,
-    imageSize: 300,
+    imageSizeWidth: 300,
+    imageSizeHeight: 300,
+    quality: 50,
 };
 
 export interface ITakePhotoOptions {
@@ -14,12 +16,16 @@ export interface ITakePhotoOptions {
      * Allow user to adjust the photo after been taken
      */
     allowEdit: boolean;
-    imageSize: number;
+    imageSizeWidth: number;
+    imageSizeHeight?: number;
+    quality?: number;
+    returnBase64?:boolean;
 }
 
 export const DEFAULT_GET_PHOTO_OPTIONS: IGetPhotoOptions = {
     allowEdit: false,
-    imageSize: 300,
+    imageSizeWidth: 300,
+    imageSizeHeight: 300,
 };
 
 export interface IGetPhotoOptions {
@@ -27,7 +33,8 @@ export interface IGetPhotoOptions {
      * Allow user to adjust the photo after choosen from library
      */
     allowEdit: boolean;
-    imageSize: number;
+    imageSizeWidth: number;
+    imageSizeHeight: number;
 }
 
 export interface ICameraService {

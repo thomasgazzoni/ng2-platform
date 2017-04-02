@@ -5,11 +5,11 @@ import { IShareService } from './share.service';
 
 export class ShareServiceIonic implements IShareService {
 
-    public shareTo(title: string, url: string, message: string): Observable<string> {
+    public shareTo(title: string, url: string, message: string, files= []): Observable<string> {
 
         const options = {
             subject: title,
-            message: title,
+            message: message,
             files: [],
             url: url,
             chooserTitle: 'Share via...'

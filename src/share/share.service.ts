@@ -5,11 +5,11 @@ import { ShareServiceBrowser } from './share.browser';
 import { ShareServiceIonic } from './share.ionic';
 
 export interface IShareService {
-    shareTo(title: string, url: string, message: string): Observable<string>;
+    shareTo(title: string, url: string, message: string, files?: Array<any>): Observable<string>;
 }
 
 export abstract class ShareService implements IShareService {
-    public abstract shareTo(title: string, url: string, message: string): Observable<string>;
+    public abstract shareTo(title: string, url: string, message: string, files?: Array<any>): Observable<string>;
 }
 
 export function shareServiceFactory(platformService: PlatformService): IShareService {

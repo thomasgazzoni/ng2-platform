@@ -54,8 +54,6 @@ export class UploadServiceBrowser extends UploadUtils implements IUploadService 
 
                         const percent = Math.round(e.loaded / e.total * 100);
 
-                        console.debug('upload percent', percent, e.loaded, e.total);
-
                         uploadProgress.next(percent);
 
                         if (percent === 100) {

@@ -21,11 +21,11 @@ export class PushServiceIonic extends PushUtils implements IPushService {
 
     public init() {
 
-        Push.hasPermission().then((data) => {
-            if (data.isEnabled) {
-                console.log('push isEnabled');
-            }
-        });
+        Push.hasPermission()
+            .then((data) => {
+                if (data.isEnabled) {
+                }
+            });
     }
 
     public subscribe() {
@@ -50,8 +50,6 @@ export class PushServiceIonic extends PushUtils implements IPushService {
         this.push.setApplicationIconBadgeNumber(() => { }, () => { }, 0);
 
         this.push.on('registration', (data) => {
-            console.debug('push notification registration', data);
-
             this.sendSubscriptionToServer(data.registrationId);
         });
 
@@ -71,11 +69,13 @@ export class PushServiceIonic extends PushUtils implements IPushService {
 
     public unsubscribe() {
         if (this.push) {
-            this.push.unregister(() => {
-                console.info('unsubscribe success');
-            }, () => {
-                console.error('unsubscribe error');
-            });
+            this.push.unregister(
+                () => {
+
+                },
+                () => {
+                    console.error('unsubscribe error');
+                });
         }
     }
 }

@@ -30,11 +30,12 @@ export class PushUtils {
         let mergedEndpoint = pushSubscription.endpoint;
         // Chrome 42 + 43 will not have the subscriptionId attached
         // to the endpoint.
-        if (pushSubscription.subscriptionId &&
-            pushSubscription.endpoint.indexOf(pushSubscription.subscriptionId) === -1) {
+        const oldChromepushSubscriptionId = (pushSubscription as any).subscriptionId
+        if (oldChromepushSubscriptionId &&
+            pushSubscription.endpoint.indexOf(oldChromepushSubscriptionId) === -1) {
             // Handle version 42 where you have separate subId and Endpoint
             mergedEndpoint = pushSubscription.endpoint + '/' +
-                pushSubscription.subscriptionId;
+                oldChromepushSubscriptionId;
         }
 
         return mergedEndpoint;

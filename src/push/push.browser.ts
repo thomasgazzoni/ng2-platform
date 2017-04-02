@@ -24,7 +24,7 @@ export class PushServiceBrowser extends PushUtils implements IPushService {
         // Check the current Notification permission.
         // If its denied, it's a permanent block until the
         // user changes the permission
-        if (Notification.permission === 'denied') {
+        if (Notification.prototype.permission === 'denied') {
             console.log('The user has blocked notifications.');
             return;
         }
@@ -63,13 +63,14 @@ export class PushServiceBrowser extends PushUtils implements IPushService {
         };
 
         navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
-            serviceWorkerRegistration.pushManager.subscribe()
+            // Call pushManager from the service worker registration
+            serviceWorkerRegistration.pushManager.subscribe(subscribeParams)
                 .then((subscription) => {
                     // The subscription was successful
                     return this.sendSubscriptionToServer(subscription.endpoint);
                 })
                 .catch((error) => {
-                    if (Notification.permission === 'denied') {
+                    if (Notification.prototype.permission === 'denied') {
                         // The user denied the notification permission which
                         // means we failed to subscribe and the user will need
                         // to manually change the notification permission to
@@ -98,17 +99,16 @@ export class PushServiceBrowser extends PushUtils implements IPushService {
                         return;
                     }
 
-                    // TODO: Make a request to your server to remove
-                    // the users data from your data store so you
-                    // don't attempt to send them push messages anymore
+                    // use NULL registration id in order to remove the reg_id from the server
                     this.sendSubscriptionToServer(undefined);
 
                     // We have a subcription, so call unsubscribe on it
                     pushSubscription.unsubscribe()
                         .then(() => {
+
                         })
-                        .catch((e) => {
-                            console.error('Unsubscription error: ', e);
+                        .catch((error) => {
+                            console.error('Unsubscription error: ', error);
                         });
                 })
                 .catch((error) => {

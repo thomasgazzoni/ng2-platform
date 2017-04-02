@@ -16,7 +16,7 @@ export class CameraServiceIonic implements ICameraService {
 
                 const cameraOptions: CameraOptions = {
                     quality: 50,
-                    destinationType: Camera.DestinationType.FILE_URI,
+                    destinationType: options && options.returnBase64 ? Camera.DestinationType.DATA_URL : Camera.DestinationType.FILE_URI,
                     sourceType: Camera.PictureSourceType.CAMERA,
                     encodingType: Camera.EncodingType.JPEG,
                     correctOrientation: true,
@@ -31,6 +31,8 @@ export class CameraServiceIonic implements ICameraService {
                         // imageData is either a base64 encoded string or a file URI
                         // If it's base64:
                         // let base64Image = 'data:image/jpeg;base64,' + imageData;
+
+                        // console.debug('imageData', imageData);
 
                         observer.next(imageData);
                         observer.complete();
@@ -48,7 +50,6 @@ export class CameraServiceIonic implements ICameraService {
             .create((observer: Observer<string>) => {
 
                 const cameraOptions: CameraOptions = {
-                    quality: 50,
                     destinationType: Camera.DestinationType.FILE_URI,
                     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                     encodingType: Camera.EncodingType.JPEG,
@@ -72,12 +73,14 @@ export class CameraServiceIonic implements ICameraService {
     private setOptions(cameraOptions: CameraOptions, customOptions: ITakePhotoOptions) {
          if (customOptions) {
             cameraOptions.allowEdit = !!customOptions.allowEdit ? customOptions.allowEdit : DEFAULT_TAKE_PHOTO_OPTIONS.allowEdit;
-            cameraOptions.targetWidth = customOptions.imageSize || DEFAULT_TAKE_PHOTO_OPTIONS.imageSize;
-            cameraOptions.targetHeight = customOptions.imageSize || DEFAULT_TAKE_PHOTO_OPTIONS.imageSize;
+            cameraOptions.targetWidth = customOptions.imageSizeWidth || DEFAULT_TAKE_PHOTO_OPTIONS.imageSizeWidth;
+            cameraOptions.targetHeight = customOptions.imageSizeHeight || customOptions.imageSizeWidth || DEFAULT_TAKE_PHOTO_OPTIONS.imageSizeWidth;
+            cameraOptions.quality = customOptions.quality || DEFAULT_TAKE_PHOTO_OPTIONS.quality;
         } else {
             cameraOptions.allowEdit = false;
             cameraOptions.targetWidth = undefined;
             cameraOptions.targetHeight = undefined;
+            cameraOptions.quality = DEFAULT_TAKE_PHOTO_OPTIONS.quality;
         }
     }
 

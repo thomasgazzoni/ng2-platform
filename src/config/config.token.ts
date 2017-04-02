@@ -9,9 +9,11 @@ export function platformServiceFactory(platformConfig: IPlatformConfig) {
     const platform = new PlatformService();
 
     platformConfig = platformConfig || {
-        appName: 'app',
-        appVersion: '1.0',
+        debug: false,
+        appName: 'app-name',
+        appVersion: '1.0.0',
         FCMSenderId: undefined,
+        GATrackerId: undefined,
     };
 
     platform.setConfig(platformConfig);

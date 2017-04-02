@@ -5,7 +5,7 @@ import { IShareService } from './share.service';
 
 export class ShareServiceBrowser implements IShareService {
 
-    public shareTo(title: string, url: string, message: string): Observable<string> {
+    public shareTo(title: string, url: string, message: string, files = []): Observable<string> {
 
         const options = {
             message: title,
@@ -18,25 +18,24 @@ export class ShareServiceBrowser implements IShareService {
         return Observable
             .create((observer: Observer<string>) => {
 
-                if (navigator.share === undefined) {
-                    observer.error('Share API not supported');
-                    observer.complete();
-                    return;
-                }
+                // if (navigator.share === undefined) {
+                observer.error('Not implemented on the browser yet');
+                observer.complete();
+                // }
 
-                navigator.share({
-                    title: options.title,
-                    text: options.message,
-                    url: options.url
-                })
-                    .then((data) => {
-                        observer.next(data);
-                        observer.complete();
-                    })
-                    .catch((error) => {
-                        observer.error(error);
-                        observer.complete();
-                    });
+                //     navigator.share({
+                //         title: options.title,
+                //         text: options.message,
+                //         url: options.url
+                //     })
+                //         .then((data) => {
+                //             observer.next(data);
+                //             observer.complete();
+                //         })
+                //         .catch((error) => {
+                //             observer.error(error);
+                //             observer.complete();
+                //         });
             });
     }
 }

@@ -20,7 +20,7 @@ export class DownloadServiceIonic implements IDownloadService {
         const targetUri = `${window.cordova.file.externalDataDirectory}${fileName}`;
 
         fileTransfer.onProgress((event) => {
-            console.debug('download onProgress:', event.loaded, event.total);
+            // console.debug('download onProgress:', event.loaded, event.total);
         });
 
         return Observable
@@ -30,8 +30,9 @@ export class DownloadServiceIonic implements IDownloadService {
                     uri,
                     targetUri)
                     .then((entry) => {
-                        console.debug('download complete: ' + entry.toURL());
+                        // console.debug('download complete: ' + entry.toURL());
                         // FileOpener.open(entry.toURL(), 'application/');
+
                         LocalNotifications.schedule({
                             id: 100,
                             title: `Download completed`,
@@ -43,9 +44,7 @@ export class DownloadServiceIonic implements IDownloadService {
                         observer.complete();
 
                     }).catch((error) => {
-                        console.debug('download error source ' + error.source);
-                        console.debug('download error target ' + error.target);
-                        console.debug('download error code' + error.code);
+
                         LocalNotifications.schedule({
                             id: 100,
                             title: `Downloading ${fileName} error`,

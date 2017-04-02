@@ -41,6 +41,14 @@ export class PlatformService {
         return this._appName;
     }
 
+    public get appVersion(): string {
+        return this._appVersion;
+    }
+
+    public get GATrackerId(): string {
+        return this._config.GATrackerId;
+    }
+
     public get FCMSenderId(): string {
         return this._config.FCMSenderId;
     }
@@ -61,13 +69,10 @@ export class PlatformService {
         this._isDesktop = !!window.navigator.userAgent.match(/Electron/);
         this._isWeb = !(this._isMobile || this._isDesktop);
 
-
         if (window.device && window.device.platform) {
             this._iOS = !!window.device.platform.match(/ios/gi);
             this._isAndroid = !!window.device.platform.match(/android/gi);
         }
-
-        console.debug('runGuessPlatform', this);
     }
 
     public setConfig(config: IPlatformConfig) {

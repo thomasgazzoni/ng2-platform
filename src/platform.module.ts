@@ -15,6 +15,9 @@ import {
     PLATFORM_CONFIG_TOKEN, platformServiceFactory,
 } from './config/config.token';
 import {
+    AnalyticsService, analyticsServiceFactory,
+} from './analytics/analytics.service';
+import {
     CameraService, cameraServiceFactory,
 } from './camera/camera.service';
 import {
@@ -79,6 +82,11 @@ export class Ng2PlatformModule {
                     provide: PlatformService,
                     useFactory: platformServiceFactory,
                     deps: [PLATFORM_CONFIG_TOKEN]
+                },
+                {
+                    provide: AnalyticsService,
+                    useFactory: analyticsServiceFactory,
+                    deps: [PlatformService]
                 },
                 {
                     provide: CameraService,

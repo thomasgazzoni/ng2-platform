@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
 import { PlatformService } from '../platform.service';
 import { PushServiceBrowser } from './push.browser';

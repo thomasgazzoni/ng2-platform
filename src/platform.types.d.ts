@@ -10,7 +10,3 @@ interface Navigator {
 interface PushSubscription {
     unsubscribe();
 }
-
-declare namespace Notification {
-    var permission: any;
-}
